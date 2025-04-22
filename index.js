@@ -1,29 +1,22 @@
-class User {
-    constructor(name, email, phone) {
-      this.name = name
-      this.email = email
-      this.phone = phone
-    }
-  
-    findPT() {
-  
-    }
-  
-    bookPT(pt) {
-      this.bookings.push(pt)
-    }
-  }
-  
-  class Athelete extends User {
-    constructor(name, email, phone) {
-      super(name, email, phone)
-  
-      this.measurements = []
-    }
-  }
-  
-  const user = new Athlete('Armagan', 'armagan@nimble.dev', '+4914132')
-  
-  const pts = user.findPT()
-  
-  user.bookPT(pts[0])
+const colors = require('colors')
+
+const Passenger = require('./passenger')
+const Driver = require('./driver')
+
+const armagan = new Passenger('Armagan', 'Kreuzberg')
+const stefan = new Driver('Stefan', 'Treptower Park')
+
+armagan.book(stefan, 'Kreuzberg', 'Neukolln')
+armagan.book(stefan, 'Neukolln', 'Mitte')
+armagan.book(stefan, 'Mitte', 'Kreuzberg')
+armagan.book(stefan, 'Kreuzberg', 'SXF')
+
+function printBooking(booking) {
+  console.log(`${colors.blue(booking.passenger.name)} booked ${colors.blue(booking.driver.name)} to travel from ${colors.bgRed.white(booking.origin)} to ${colors.bgRed.white(booking.destination)}`)
+}
+
+function printBookingHistory(passenger) {
+  passenger.bookings.forEach(printBooking)
+}
+
+printBookingHistory(armagan)
